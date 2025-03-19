@@ -8,6 +8,7 @@ body {
     padding: 90px;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: none;
 }
 
 /* Grid Layout */
@@ -30,7 +31,7 @@ body {
     height: 300px;
     overflow: hidden;
     border-radius: 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 /* The banner (default view) */
@@ -57,4 +58,52 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* Custom Cursor */
+.Cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+    z-index: 1000;
+    display: none; /* Hidden initially */
+}
+
+/* Make cursor visible when page loads */
+.is-ready .Cursor {
+    display: block;
+}
+
+/* Cursor animation */
+.Cursor svg g {
+    transform: translate3d(-1em, 1em, 0);
+    transition: transform 0.6s cubic-bezier(.215, .61, .355, 1);
+}
+
+/* Cursor Lines (Arrow Animation) */
+.Cursor svg line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 0.8s cubic-bezier(.25, .46, .45, .94);
+}
+
+/* When active (hovering over a slide-container) */
+.Cursor.is-active svg g {
+    transform: translateZ(0);
+    transition-delay: 0.2s;
+}
+
+/* Animate the arrow */
+.Cursor.is-active svg line {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.8s;
+    transition-delay: 0.2s;
+}
+
+/* Cursor hover effect */
+.Cursor.is-active svg .arrow-tail {
+    transition-delay: 0.3s;
+    transition-duration: 0.6s;
 }
